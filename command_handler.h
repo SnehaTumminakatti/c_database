@@ -42,11 +42,20 @@ typedef struct{
 }Statement;
 
 typedef struct{
-    uint32_t num_rows;
+    int file_descriptor;
+    uint32_t file_length;
     void* pages[TABLE_MAX_PAGES];
+}Pager;
+
+typedef struct{
+    uint32_t num_rows;
+    Pager* pager;
 }Table;
 
+
 typedef enum{EXECUTE_SUCCESS,EXECUTE_TABLE_FULL} ExecuteResult;
+
+
 
 extern const uint32_t ID_SIZE ;
  extern const uint32_t USERNAME_SIZE;
