@@ -3,6 +3,8 @@
 #include <stdint.h>
 #include <string.h>
 #include"input.h"
+#include <fcntl.h>
+#include <errno.h>
 
 #define TABLE_MAX_PAGES 100
 #define COLUMN_USERNAME_SIZE 32
@@ -91,5 +93,10 @@ MetaCommandResult do_meta_command(InputBuffer* inputBuffer,Table* table);
 ExecuteResult prepare_insert(InputBuffer* input_buffer,Statement* statement);
 PrepareResult prepareStatement(InputBuffer* input_buffer,Statement* statement);
 ExecuteResult execute_statement(Statement* statement,Table* table);
+void pager_flush(Pager* pager,uint32_t page_num,uint32_t size);
 
+Table* db_open(const char* filename);
+Pager* pager_open(const char* filename);
+void* get_page(Pager* pager ,uint32_t page_num);
+void db_close(Table* table);
 #endif
